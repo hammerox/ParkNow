@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
     implementation 'com.github.Kennyc1012:BottomSheet:2.4.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

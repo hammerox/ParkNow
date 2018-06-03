@@ -19,7 +19,7 @@ import com.mcustodio.parknow.R
 
 class MainActivity : AppCompatActivity() {
 
-    private val pagerAdapter by lazy { FragmentAdapter(supportFragmentManager, ListFragment(), ListFragment()) }
+    private val pagerAdapter by lazy { FragmentAdapter(supportFragmentManager, ListFragment(), MapFragment()) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
