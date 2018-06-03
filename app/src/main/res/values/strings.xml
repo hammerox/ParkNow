@@ -10,4 +10,7 @@
     <string name="developer_hint">Developer</string>
     <string name="developer_value">Mauricio Ramalho Custodio</string>
     <string name="appversion_hint">App Version</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

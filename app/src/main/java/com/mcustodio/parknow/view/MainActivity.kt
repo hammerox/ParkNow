@@ -15,19 +15,23 @@ import android.view.MenuItem
 import com.kennyc.bottomsheet.BottomSheet
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.mcustodio.parknow.R
-import com.mcustodio.parknow.log
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val pagerAdapter by lazy { FragmentAdapter(supportFragmentManager, ListFragment(), ListFragment()) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupBottomNavView()
+        setupViewPagerAndFragments()
     }
 
     private fun setupBottomNavView() {
         nav_main_bottom.setOnNavigationItemSelectedListener(onNavSelectedListener)
+        // Diminuindo tamanho dos icons
         val menuView = nav_main_bottom.getChildAt(0) as BottomNavigationMenuView
         val size = 20f
         for (i in 0 until menuView.childCount) {
@@ -40,11 +44,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupViewPagerAndFragments() {
+        viewpager_main.adapter = pagerAdapter
+    }
+
     private val onNavSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.action_main_list -> log("LISTA")
-            R.id.action_main_map -> log("MAPA")
-            R.id.action_main_more -> showMoreActions()
+            R.id.action_main_list -> viewpager_main.currentItem = 0
+            R.id.action_main_map -> viewpager_main.currentItem = 1
+            R.id.action_main_more -> {
+                showMoreActions()
+                return@OnNavigationItemSelectedListener false
+            }
         }
         true
     }
@@ -58,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             }
             Toast.makeText(this@MainActivity, p1?.title, Toast.LENGTH_SHORT).show()
         }
-
         override fun onSheetDismissed(p0: BottomSheet, p1: Any?, p2: Int) {}
         override fun onSheetShown(p0: BottomSheet, p1: Any?) {}
     }
@@ -75,10 +85,7 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Logout")
             .setMessage(getString(R.string.main_logout))
-            .setPositiveButton(android.R.string.yes) { _, _ ->
-                logout()
-                Toast.makeText(this, "Yaay", Toast.LENGTH_SHORT).show()
-            }
+            .setPositiveButton(android.R.string.yes) { _, _ -> logout() }
             .setNegativeButton(android.R.string.no, null)
             .show()
     }
