@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.debug
 import com.mcustodio.parknow.model.AppDatabase
+import com.mcustodio.parknow.view.main.MainActivity
 
 
 class SplashActivity : AppCompatActivity() {

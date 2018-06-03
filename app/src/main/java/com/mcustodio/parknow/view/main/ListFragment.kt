@@ -1,4 +1,4 @@
-package com.mcustodio.parknow.view
+package com.mcustodio.parknow.view.main
 
 
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.mcustodio.parknow.view
+package com.mcustodio.parknow.view.main
 
 import com.google.android.gms.maps.SupportMapFragment
 

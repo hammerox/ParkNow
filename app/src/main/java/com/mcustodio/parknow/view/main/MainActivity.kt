@@ -1,4 +1,4 @@
-package com.mcustodio.parknow.view
+package com.mcustodio.parknow.view.main
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -16,6 +16,9 @@ import com.kennyc.bottomsheet.BottomSheet
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.model.AppDatabase
+import com.mcustodio.parknow.view.AboutActivity
+import com.mcustodio.parknow.view.SplashActivity
+import com.mcustodio.parknow.view.edit.EditActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -64,11 +67,10 @@ class MainActivity : AppCompatActivity() {
     private val onMoreOptionListener = object : BottomSheetListener {
         override fun onSheetItemSelected(p0: BottomSheet, p1: MenuItem?, p2: Any?) {
             when (p1?.itemId) {
-                R.id.action_main_add -> {}// todo
+                R.id.action_main_add -> EditActivity.launchNew(this@MainActivity)
                 R.id.action_main_about -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 R.id.action_main_logout -> askToLogout()
             }
-            Toast.makeText(this@MainActivity, p1?.title, Toast.LENGTH_SHORT).show()
         }
         override fun onSheetDismissed(p0: BottomSheet, p1: Any?, p2: Int) {}
         override fun onSheetShown(p0: BottomSheet, p1: Any?) {}

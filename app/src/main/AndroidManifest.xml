@@ -11,8 +11,9 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD_QBOepuwYR6Yc88joUTDK63QYji9AEBA"/>
-        <activity android:name=".view.MainActivity" />
+            android:value="AIzaSyD_QBOepuwYR6Yc88joUTDK63QYji9AEBA" />
+
+        <activity android:name=".view.main.MainActivity" />
         <activity
             android:name=".view.SplashActivity"
             android:theme="@style/FullScreen">
@@ -25,8 +26,10 @@
         <activity android:name=".view.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="view.MainActivity" />
+                android:value=".view.main.MainActivity" />
         </activity>
+        <activity android:name=".view.detail.DetailActivity" />
+        <activity android:name=".view.edit.EditActivity"></activity>
     </application>
 
 </manifest>
