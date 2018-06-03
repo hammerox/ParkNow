@@ -1,4 +1,4 @@
-package com.mcustodio.parknow
+package com.mcustodio.parknow.view
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +14,8 @@ import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import com.kennyc.bottomsheet.BottomSheet
 import com.kennyc.bottomsheet.BottomSheetListener
+import com.mcustodio.parknow.R
+import com.mcustodio.parknow.log
 
 
 class MainActivity : AppCompatActivity() {

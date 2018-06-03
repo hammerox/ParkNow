@@ -1,4 +1,4 @@
-package com.mcustodio.parknow
+package com.mcustodio.parknow.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

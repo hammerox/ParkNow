@@ -1,4 +1,4 @@
-package com.mcustodio.parknow
+package com.mcustodio.parknow.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import com.firebase.ui.auth.AuthUI
 import java.util.*
 import com.google.firebase.auth.FirebaseAuth
-
+import com.mcustodio.parknow.R
 
 
 class SplashActivity : AppCompatActivity() {
 
 
-    private val splashScreenDuration = 2000L
+    private val splashScreenDuration = 1000L
     private val requestCode = 0
 
 
