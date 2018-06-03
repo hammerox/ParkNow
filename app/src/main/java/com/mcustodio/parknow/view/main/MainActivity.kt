@@ -1,5 +1,7 @@
 package com.mcustodio.parknow.view.main
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +18,7 @@ import com.kennyc.bottomsheet.BottomSheet
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.model.AppDatabase
+import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.view.AboutActivity
 import com.mcustodio.parknow.view.SplashActivity
 import com.mcustodio.parknow.view.edit.EditActivity
@@ -23,6 +26,7 @@ import com.mcustodio.parknow.view.edit.EditActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
     private val pagerAdapter by lazy { FragmentAdapter(supportFragmentManager, ListFragment(), MapFragment()) }
 
 
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupBottomNavView()
         setupViewPagerAndFragments()
+        setupViewModel()
     }
 
     private fun setupBottomNavView() {
@@ -50,6 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPagerAndFragments() {
         viewpager_main.adapter = pagerAdapter
+    }
+
+    private fun setupViewModel() {
+        viewModel.parkingLots.observe(this, Observer { data ->
+            if (data == null || data.isEmpty()) {
+                viewModel.add(ParkingLot.createMock())
+            }
+        })
     }
 
     private val onNavSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
