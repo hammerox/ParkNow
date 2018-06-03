@@ -12,6 +12,7 @@ class ParkingLot(@PrimaryKey(autoGenerate = true) var id : Long? = null,
                  var name: String? = null,
                  var description: String? = null,
                  var address: String? = null,
+                 var phone: String? = null,
                  var openAt: Time? = null,
                  var closeAt: Time? = null,
                  var pricePerHour: Float? = null,
@@ -30,6 +31,7 @@ class ParkingLot(@PrimaryKey(autoGenerate = true) var id : Long? = null,
                 name = "FIAP"
                 description = "Estacionamento próximo da FIAP"
                 address = "Av. Paulista, 1.106 - Bela Vista, São Paulo - SP, 01310-100"
+                phone = "019992256303"
                 openAt = Time.valueOf("08:00:00")
                 closeAt = Time.valueOf("22:00:00")
                 pricePerHour = 10.0f

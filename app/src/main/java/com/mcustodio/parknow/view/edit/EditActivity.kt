@@ -40,6 +40,7 @@ class EditActivity : AppCompatActivity() {
         input_edit_name
         input_edit_description
         input_edit_address
+        input_edit_phone
         input_edit_openat
         input_edit_closeat
         input_edit_priceperhour

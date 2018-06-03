@@ -20,4 +20,5 @@
     <string name="parking_priceperday">Price per Day</string>
     <string name="parking_pricepermonth">Price per Month</string>
     <string name="parking_description">Description</string>
+    <string name="parking_phone">Contact</string>
 </resources>

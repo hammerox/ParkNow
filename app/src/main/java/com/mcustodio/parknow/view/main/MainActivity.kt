@@ -11,7 +11,6 @@ import android.support.design.widget.BottomNavigationView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import com.firebase.ui.auth.AuthUI
-import android.widget.Toast
 import android.support.v7.app.AlertDialog
 import android.view.MenuItem
 import com.kennyc.bottomsheet.BottomSheet
