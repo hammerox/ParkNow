@@ -4,4 +4,7 @@
     <string name="menu_main_map">Map</string>
     <string name="menu_main_list">List</string>
     <string name="main_logout">Disconnect your current User?</string>
+    <string name="add_parkinglot">Add Parking Lot</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
 </resources>

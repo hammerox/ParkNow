@@ -27,7 +27,7 @@
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@color/bottom_nav_color"
             app:itemTextColor="@color/bottom_nav_color"
-            app:menu="@menu/activity_main"/>
+            app:menu="@menu/main_bottomnav"/>
 
     </FrameLayout>
 

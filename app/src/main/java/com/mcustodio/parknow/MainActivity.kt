@@ -11,10 +11,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.firebase.ui.auth.AuthUI
 import android.widget.Toast
 import android.support.v7.app.AlertDialog
-
-
-
-
+import android.view.MenuItem
+import com.kennyc.bottomsheet.BottomSheet
+import com.kennyc.bottomsheet.BottomSheetListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,13 +42,30 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_main_list -> log("LISTA")
             R.id.action_main_map -> log("MAPA")
-            R.id.action_main_more -> {
-                log("MAIS")
-                askToLogout()
-            }
-
+            R.id.action_main_more -> showMoreActions()
         }
         true
+    }
+
+    private val onMoreOptionListener = object : BottomSheetListener {
+        override fun onSheetItemSelected(p0: BottomSheet, p1: MenuItem?, p2: Any?) {
+            when (p1?.itemId) {
+                R.id.action_main_logout -> askToLogout()
+            }
+            Toast.makeText(this@MainActivity, p1?.title, Toast.LENGTH_SHORT).show()
+        }
+
+        override fun onSheetDismissed(p0: BottomSheet, p1: Any?, p2: Int) {}
+        override fun onSheetShown(p0: BottomSheet, p1: Any?) {}
+    }
+
+    private fun showMoreActions() {
+        BottomSheet.Builder(this)
+                .setSheet(R.menu.main_moreoptions)
+                .setTitle("More options")
+                .setListener(onMoreOptionListener)
+//                .setObject(myObject)
+                .show()
     }
 
     private fun askToLogout() {
@@ -58,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             .setMessage(getString(R.string.main_logout))
             .setPositiveButton(android.R.string.yes) { _, _ ->
                 logout()
-                Toast.makeText(this@MainActivity, "Yaay", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Yaay", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton(android.R.string.no, null)
             .show()
