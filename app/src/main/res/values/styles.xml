@@ -14,5 +14,23 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AboutText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AboutText.Hint">
+        <item name="android:layout_marginTop">@dimen/about_margin</item>
+    </style>
+
+    <style name="AboutText.Value">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
+
+
 
 </resources>

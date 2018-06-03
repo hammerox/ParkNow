@@ -7,4 +7,7 @@
     <string name="add_parkinglot">Add Parking Lot</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
+    <string name="developer_hint">Developer</string>
+    <string name="developer_value">Mauricio Ramalho Custodio</string>
+    <string name="appversion_hint">App Version</string>
 </resources>

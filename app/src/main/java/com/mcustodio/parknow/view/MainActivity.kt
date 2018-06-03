@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     private val onMoreOptionListener = object : BottomSheetListener {
         override fun onSheetItemSelected(p0: BottomSheet, p1: MenuItem?, p2: Any?) {
             when (p1?.itemId) {
+                R.id.action_main_add -> {}// todo
+                R.id.action_main_about -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 R.id.action_main_logout -> askToLogout()
             }
             Toast.makeText(this@MainActivity, p1?.title, Toast.LENGTH_SHORT).show()
@@ -63,11 +65,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMoreActions() {
         BottomSheet.Builder(this)
-                .setSheet(R.menu.main_moreoptions)
-                .setTitle("More options")
-                .setListener(onMoreOptionListener)
-//                .setObject(myObject)
-                .show()
+            .setSheet(R.menu.main_moreoptions)
+            .setTitle("More options")
+            .setListener(onMoreOptionListener)
+            .show()
     }
 
     private fun askToLogout() {
