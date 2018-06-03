@@ -13,16 +13,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        resizeBottomNavIcons()
+    }
 
+    private fun resizeBottomNavIcons() {
         val menuView = nav_main_bottom.getChildAt(0) as BottomNavigationMenuView
+        val size = 20f
         for (i in 0 until menuView.childCount) {
             val iconView = menuView.getChildAt(i).findViewById<View>(android.support.design.R.id.icon)
             val layoutParams = iconView.layoutParams
             val displayMetrics = resources.displayMetrics
-            // set your height here
-            layoutParams.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f, displayMetrics).toInt()
-            // set your width here
-            layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f, displayMetrics).toInt()
+            layoutParams.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, displayMetrics).toInt()
+            layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, displayMetrics).toInt()
             iconView.layoutParams = layoutParams
         }
     }
