@@ -15,6 +15,7 @@ import android.view.MenuItem
 import com.kennyc.bottomsheet.BottomSheet
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.mcustodio.parknow.R
+import com.mcustodio.parknow.model.AppDatabase
 
 
 class MainActivity : AppCompatActivity() {
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener {
+                AppDatabase.firstAccess = true  // Logout from Database
                 finishAffinity()
                 val intent = Intent(this, SplashActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

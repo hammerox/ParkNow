@@ -15,14 +15,14 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         const val VERSION = 1
         private lateinit var INSTANCE: AppDatabase
-        private val databaseName = "baseapp-database"
-        private var firstAccess = true
+        private val databaseName = "parknow-db"
+        var firstAccess = true
 
 
-        fun getFrom(context: Context): AppDatabase {
+        fun getFrom(context: Context, user: String): AppDatabase {
             if (firstAccess) {
                 synchronized(AppDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, databaseName)
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "$databaseName-$user")
                             .fallbackToDestructiveMigration()
                             .build()
                     firstAccess = false

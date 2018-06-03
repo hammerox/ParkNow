@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.debug
+import com.mcustodio.parknow.model.AppDatabase
 
 
 class SplashActivity : AppCompatActivity() {
@@ -72,7 +73,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun login(user: FirebaseUser) {
-        // todo - Do something with user
+        AppDatabase.getFrom(this, user.uid)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
