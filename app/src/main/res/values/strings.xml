@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">ParkNow</string>
-    <string name="menu_main_more">More</string>
-    <string name="menu_main_map">Map</string>
     <string name="menu_main_list">List</string>
+    <string name="menu_main_map">Map</string>
+    <string name="menu_main_more">More</string>
     <string name="main_logout">Disconnect your current User?</string>
     <string name="add_parkinglot">Add Parking Lot</string>
     <string name="about">About</string>
@@ -11,6 +11,13 @@
     <string name="developer_value">Mauricio Ramalho Custodio</string>
     <string name="appversion_hint">App Version</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Parking Object Fields-->
+    <string name="parking_name">Parking Lot Name</string>
+    <string name="parking_address">Address</string>
+    <string name="parking_openat">Opens at</string>
+    <string name="parking_closeat">Closes at</string>
+    <string name="parking_priceperhour">Price per Hour</string>
+    <string name="parking_priceperday">Price per Day</string>
+    <string name="parking_pricepermonth">Price per Month</string>
+    <string name="parking_description">Description</string>
 </resources>
