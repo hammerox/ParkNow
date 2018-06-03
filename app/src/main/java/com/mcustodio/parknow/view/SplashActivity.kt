@@ -9,7 +9,9 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import com.firebase.ui.auth.AuthUI
 import java.util.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.mcustodio.parknow.R
+import com.mcustodio.parknow.debug
 
 
 class SplashActivity : AppCompatActivity() {
@@ -34,17 +36,27 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun tryToLogin() {
+        val user = FirebaseAuth.getInstance().currentUser
+        debug(user?.email)
+        if (user != null) {
+            login(user)
+        } else {
+            signIn()
+        }
+    }
+
+    private fun signIn() {
         val providers = Arrays.asList(
                 AuthUI.IdpConfig.EmailBuilder().build(),
                 AuthUI.IdpConfig.GoogleBuilder().build()
         )
-        val firebaseLoginIntent = AuthUI.getInstance()
+        val firebaseSignInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setTheme(R.style.FullScreen)
                 .setAvailableProviders(providers)
                 .build()
 
-        startActivityForResult(firebaseLoginIntent, requestCode)
+        startActivityForResult(firebaseSignInIntent, requestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,13 +64,17 @@ class SplashActivity : AppCompatActivity() {
         if (requestCode == this.requestCode) {
             if (resultCode == RESULT_OK) {  // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-
+                login(user!!)
             } else {
                 finish()
             }
         }
+    }
+
+    private fun login(user: FirebaseUser) {
+        // todo - Do something with user
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
