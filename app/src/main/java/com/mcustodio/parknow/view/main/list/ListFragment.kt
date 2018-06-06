@@ -41,18 +41,16 @@ class ListFragment : Fragment() {
         return view
     }
 
-
     private fun onCardClick() : ((ParkingLot) -> Unit) = { parkingLot ->
         DetailActivity.launch(activity!!, parkingLot.id!!)
     }
 
-
     private fun onCardLongClick() : ((ParkingLot) -> Boolean) = { parkingLot ->
         AlertDialog.Builder(activity!!)
-            .setMessage(getString(R.string.remove_description))
+            .setMessage(getString(R.string.remove))
             .setPositiveButton(android.R.string.yes) { _, _ ->
                 viewModel.delete(parkingLot)
-                Toast.makeText(activity, "Removed", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.removed), Toast.LENGTH_LONG).show()
             }
             .setNegativeButton(android.R.string.no, null)
             .show()

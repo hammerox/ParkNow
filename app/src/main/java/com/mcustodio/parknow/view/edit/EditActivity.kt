@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.google.android.gms.maps.model.LatLng
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.hideWhenKeyboardIsVisible
 import kotlinx.android.synthetic.main.activity_edit.*
@@ -13,6 +14,7 @@ class EditActivity : AppCompatActivity() {
 
 
     val parkingId by lazy { intent.getLongExtra(KEY_ID, -1) }
+    val initialPosition by lazy { LatLng(intent.getDoubleExtra(KEY_LAT, 0.0), intent.getDoubleExtra(KEY_LNG, 0.0)) }
 
 
 
@@ -53,9 +55,13 @@ class EditActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_ID = "KEY_ID"
+        const val KEY_LAT = "KEY_LAT"
+        const val KEY_LNG = "KEY_LNG"
 
-        fun launchNew(context: Context) {
+        fun launchNew(context: Context, pos: LatLng) {
             val intent = Intent(context, EditActivity::class.java)
+            intent.putExtra(KEY_LAT, pos.latitude)
+            intent.putExtra(KEY_LNG, pos.longitude)
             context.startActivity(intent)
         }
 

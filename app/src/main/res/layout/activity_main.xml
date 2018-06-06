@@ -31,6 +31,16 @@
             app:itemTextColor="@color/bottom_nav_color"
             app:menu="@menu/main_bottomnav"/>
 
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/nav_main_creationcontrols"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:itemBackground="@color/colorPrimary"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/main_creationcontrols"/>
+
     </FrameLayout>
 
 

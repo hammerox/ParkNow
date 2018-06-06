@@ -18,9 +18,9 @@ import com.kennyc.bottomsheet.BottomSheetListener
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.model.AppDatabase
 import com.mcustodio.parknow.model.ParkingLot
+import com.mcustodio.parknow.switchVisibility
 import com.mcustodio.parknow.view.AboutActivity
 import com.mcustodio.parknow.view.SplashActivity
-import com.mcustodio.parknow.view.edit.EditActivity
 import com.mcustodio.parknow.view.main.list.ListFragment
 import com.mcustodio.parknow.view.main.map.MapFragment
 
@@ -34,15 +34,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setupBottomNavView()
+        setupBottomNavView(nav_main_bottom)
+        setupBottomNavView(nav_main_creationcontrols)
         setupViewPagerAndFragments()
         setupViewModel()
     }
 
-    private fun setupBottomNavView() {
-        nav_main_bottom.setOnNavigationItemSelectedListener(onNavSelectedListener)
+    override fun onBackPressed() {
+        if (viewModel.isCreationMode.value == true) viewModel.isCreationMode.value = false
+        else super.onBackPressed()
+    }
+
+    private fun setupBottomNavView(bottomNav: BottomNavigationView) {
+        bottomNav.setOnNavigationItemSelectedListener(onNavSelectedListener)
         // Diminuindo tamanho dos icons
-        val menuView = nav_main_bottom.getChildAt(0) as BottomNavigationMenuView
+        val menuView = bottomNav.getChildAt(0) as BottomNavigationMenuView
         val size = 20f
         for (i in 0 until menuView.childCount) {
             val iconView = menuView.getChildAt(i).findViewById<View>(android.support.design.R.id.icon)
@@ -60,9 +66,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         viewModel.parkingLots.observe(this, Observer { data ->
-            if (data == null || data.isEmpty()) {
+            if (data?.isEmpty() == true) {
                 viewModel.add(ParkingLot.createMock())
             }
+        })
+
+        viewModel.isCreationMode.observe(this, Observer {
+            if (it == true) {
+                nav_main_bottom.selectedItemId = R.id.action_main_map
+            }
+            nav_main_bottom.switchVisibility(it != true)
+            nav_main_creationcontrols.switchVisibility(it == true)
         })
     }
 
@@ -74,6 +88,8 @@ class MainActivity : AppCompatActivity() {
                 showMoreActions()
                 return@OnNavigationItemSelectedListener false
             }
+            R.id.action_main_creationokay -> { pagerAdapter.mapFragment.launchEditActivity() }
+            R.id.action_main_creationcancel -> { viewModel.isCreationMode.value = false }
         }
         true
     }
@@ -81,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private val onMoreOptionListener = object : BottomSheetListener {
         override fun onSheetItemSelected(p0: BottomSheet, p1: MenuItem?, p2: Any?) {
             when (p1?.itemId) {
-                R.id.action_main_add -> EditActivity.launchNew(this@MainActivity)
+                R.id.action_main_add -> viewModel.isCreationMode.value = true
                 R.id.action_main_about -> startActivity(Intent(this@MainActivity, AboutActivity::class.java))
                 R.id.action_main_logout -> askToLogout()
             }
