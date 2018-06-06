@@ -3,6 +3,7 @@ package com.mcustodio.parknow.view.main
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import com.mcustodio.parknow.view.main.map.MapFragment
 
 class FragmentAdapter(fm: FragmentManager,
                       val listFragment: Fragment,

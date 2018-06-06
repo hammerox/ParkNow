@@ -21,6 +21,8 @@ import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.view.AboutActivity
 import com.mcustodio.parknow.view.SplashActivity
 import com.mcustodio.parknow.view.edit.EditActivity
+import com.mcustodio.parknow.view.main.list.ListFragment
+import com.mcustodio.parknow.view.main.map.MapFragment
 
 
 class MainActivity : AppCompatActivity() {

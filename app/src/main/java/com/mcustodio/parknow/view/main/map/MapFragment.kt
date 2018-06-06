@@ -1,4 +1,4 @@
-package com.mcustodio.parknow.view.main
+package com.mcustodio.parknow.view.main.map
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.mcustodio.parknow.view.main.MainViewModel
 
 class MapFragment : SupportMapFragment() {
 

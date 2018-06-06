@@ -20,4 +20,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun add(parkingLot: ParkingLot) {
         parkingRepo.insert(parkingLot)
     }
+
+
+    fun delete(parkingLot: ParkingLot) {
+        parkingRepo.delete(parkingLot)
+    }
 }
