@@ -35,7 +35,7 @@ class ListFragment : Fragment() {
         view.recycler_mainlist.adapter = adapter
 
         viewModel.parkingLots.observe(this, Observer { data ->
-            adapter.recordList = data ?: arrayListOf()
+            adapter.recordList = data ?: listOf()
         })
 
         return view

@@ -70,13 +70,16 @@ class MapFragment : SupportMapFragment() {
         map?.clear()
         val markers = pins?.map { map?.addMarker(it) }  // Add markers to map and save to variable
         val builder = LatLngBounds.Builder()
-        markers?.filterNotNull()?.forEach { builder.include(it.position) }
-        val bounds = builder.build()
-        val camera = CameraUpdateFactory.newLatLngBounds(bounds, 15)
-        map?.animateCamera(camera)
+        if (markers?.isNotEmpty() == true) {
+            markers.filterNotNull().forEach { builder.include(it.position) }
+            val bounds = builder.build()
+            val camera = CameraUpdateFactory.newLatLngBounds(bounds, 250)
+            map?.animateCamera(camera)
+        }
     }
 
     fun launchEditActivity() {
         movablePin?.position?.let { EditActivity.launchNew(activity!!, it) }
+        viewModel.isCreationMode.value = false
     }
 }
