@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -33,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         setupView()
-        setupFabs()
+        setupButtons()
         setupViewModel()
     }
 
@@ -56,40 +57,47 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setupView() {
         if (viewOnly == true) {
-            input_edit_name.isEnabled = false
-            input_edit_description.isEnabled = false
-            input_edit_address.isEnabled = false
-            input_edit_phone.isEnabled = false
-            input_edit_openat.isEnabled = false
-            input_edit_closeat.isEnabled = false
-            input_edit_priceperhour.isEnabled = false
-            input_edit_priceperday.isEnabled = false
-            input_edit_pricepermonth.isEnabled = false
-            fab_edit_edit.hideWhenKeyboardIsVisible(this)
+            input_detail_name.isEnabled = false
+            input_detail_description.isEnabled = false
+            input_detail_address.isEnabled = false
+            input_detail_phone.isEnabled = false
+            input_detail_openat.isEnabled = false
+            input_detail_closeat.isEnabled = false
+            input_detail_priceperhour.isEnabled = false
+            input_detail_priceperday.isEnabled = false
+            input_detail_pricepermonth.isEnabled = false
+            fab_detail_edit.hideWhenKeyboardIsVisible(this)
         } else {
-            fab_edit_done.hideWhenKeyboardIsVisible(this)
+            fab_detail_done.hideWhenKeyboardIsVisible(this)
         }
     }
 
-    private fun setupFabs() {
-        fab_edit_edit.setOnClickListener { launchEdit(this, parkingId!!) }
-        fab_edit_edit.switchVisibility(viewOnly == true)
+    private fun setupButtons() {
+        fab_detail_edit.switchVisibility(viewOnly == true)
+        fab_detail_edit.setOnClickListener { launchEdit(this, parkingId!!) }
 
-        fab_edit_done.setOnClickListener { upsertRecord() }
-        fab_edit_done.switchVisibility(viewOnly == false)
+        fab_detail_done.switchVisibility(viewOnly == false)
+        fab_detail_done.setOnClickListener { upsertRecord() }
+
+        image_detail_call.switchVisibility(viewOnly == true)
+        image_detail_call.setOnClickListener {
+            val phone = viewModel.parkingLot.value?.phone?.trim()
+            val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+            startActivity(intent)
+        }
     }
 
     private fun setupViewModel() {
         viewModel.parkingLot.observe(this, Observer {
-            input_edit_name.setText(it?.name)
-            input_edit_description.setText(it?.description)
-            input_edit_address.setText(it?.address)
-            input_edit_phone.setText(it?.phone)
-            input_edit_openat.setText(it?.openAt?.toString())
-            input_edit_closeat.setText(it?.closeAt?.toString())
-            input_edit_priceperhour.setText(it?.pricePerHour?.toString())
-            input_edit_priceperday.setText(it?.pricePerDay?.toString())
-            input_edit_pricepermonth.setText(it?.pricePerMonth?.toString())
+            input_detail_name.setText(it?.name)
+            input_detail_description.setText(it?.description)
+            input_detail_address.setText(it?.address)
+            input_detail_phone.setText(it?.phone)
+            input_detail_openat.setText(it?.openAt?.toString())
+            input_detail_closeat.setText(it?.closeAt?.toString())
+            input_detail_priceperhour.setText(it?.pricePerHour?.toString())
+            input_detail_priceperday.setText(it?.pricePerDay?.toString())
+            input_detail_pricepermonth.setText(it?.pricePerMonth?.toString())
         })
 
         viewModel.actionSuccess.observe(this, Observer {
@@ -99,15 +107,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun upsertRecord() {
         val parkingLot = parkingId?.let { viewModel.parkingLot.value } ?: ParkingLot()
-        parkingLot.name = input_edit_name.text.toString()
-        parkingLot.description = input_edit_description.text.toString()
-        parkingLot.address = input_edit_address.text.toString()
-        parkingLot.phone = input_edit_phone.text.toString()
-//            parkingLot.openAt = input_edit_openat
-//            parkingLot.closeAt = input_edit_closeat
-//            parkingLot.pricePerHour = input_edit_priceperhour.text.toString().toFloat()
-//            parkingLot.pricePerDay = input_edit_priceperday.text.toString().toFloat()
-//            parkingLot.pricePerMonth = input_edit_pricepermonth.text.toString().toFloat()
+        parkingLot.name = input_detail_name.text.toString()
+        parkingLot.description = input_detail_description.text.toString()
+        parkingLot.address = input_detail_address.text.toString()
+        parkingLot.phone = input_detail_phone.text.toString()
+//            parkingLot.openAt = input_detail_openat
+//            parkingLot.closeAt = input_detail_closeat
+//            parkingLot.pricePerHour = input_detail_priceperhour.text.toString().toFloat()
+//            parkingLot.pricePerDay = input_detail_priceperday.text.toString().toFloat()
+//            parkingLot.pricePerMonth = input_detail_pricepermonth.text.toString().toFloat()
         parkingLot.latitude = initialPosition.latitude
         parkingLot.longitude = initialPosition.longitude
         viewModel.upsert(parkingLot)

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_name"
+                    android:id="@+id/input_detail_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_description"
+                    android:id="@+id/input_detail_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textImeMultiLine"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_address"
+                    android:id="@+id/input_detail_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
@@ -57,18 +57,40 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
 
-                <EditText
-                    android:id="@+id/input_edit_phone"
-                    android:layout_width="match_parent"
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="@string/parking_phone"/>
+                    android:layout_weight="1">
 
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/input_detail_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:hint="@string/parking_phone"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/image_detail_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:tint="@color/colorAccent"
+                    android:src="@drawable/ic_phone"/>
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +103,7 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/input_edit_openat"
+                        android:id="@+id/input_detail_openat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -99,7 +121,7 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/input_edit_closeat"
+                        android:id="@+id/input_detail_closeat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -115,7 +137,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_priceperhour"
+                    android:id="@+id/input_detail_priceperhour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -128,7 +150,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_priceperday"
+                    android:id="@+id/input_detail_priceperday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -141,7 +163,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/input_edit_pricepermonth"
+                    android:id="@+id/input_detail_pricepermonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -158,7 +180,7 @@
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_edit_done"
+        android:id="@+id/fab_detail_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -167,7 +189,7 @@
         app:fabSize="normal"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_edit_edit"
+        android:id="@+id/fab_detail_edit"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
