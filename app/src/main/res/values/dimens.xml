@@ -3,4 +3,5 @@
     <dimen name="splash_logosize">160dp</dimen>
     <dimen name="about_margin">32dp</dimen>
     <dimen name="space_end_of_list">100dp</dimen>
+    <dimen name="space_between_times">32dp</dimen>
 </resources>

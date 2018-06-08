@@ -39,7 +39,7 @@
                     android:id="@+id/input_detail_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences|textImeMultiLine"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:hint="@string/parking_description"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -52,7 +52,7 @@
                     android:id="@+id/input_detail_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapWords"
+                    android:inputType="textCapWords|textMultiLine"
                     android:hint="@string/parking_address"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -90,8 +90,6 @@
 
             </LinearLayout>
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +110,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <Space
-                    android:layout_width="32dp"
+                    android:layout_width="@dimen/space_between_times"
                     android:layout_height="wrap_content" />
 
                 <android.support.design.widget.TextInputLayout

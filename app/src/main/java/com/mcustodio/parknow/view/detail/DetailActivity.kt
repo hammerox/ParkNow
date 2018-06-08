@@ -11,13 +11,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
-import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.hideWhenKeyboardIsVisible
 import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.switchVisibility
-import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.android.synthetic.main.activity_detail.*
 import java.sql.Time
 
 
@@ -34,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit)
+        setContentView(R.layout.activity_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         setupView()

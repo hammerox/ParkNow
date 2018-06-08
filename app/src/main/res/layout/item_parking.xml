@@ -26,6 +26,9 @@
                 android:id="@+id/text_itempark_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 tools:text="@string/parking_name" />
 
             <TextView
@@ -34,23 +37,47 @@
                 android:layout_height="wrap_content"
                 tools:text="@string/parking_address" />
 
-            <TextView
-                android:id="@+id/text_itempark_priceperhour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/parking_priceperhour" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
-            <TextView
-                android:id="@+id/text_itempark_priceperday"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="@string/parking_priceperday" />
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/text_itempark_pricepermonth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/parking_pricepermonth" />
+                <TextView
+                    style="@style/PriceTextView"
+                    android:gravity="end"
+                    android:text="H: $"/>
+
+                <TextView
+                    android:id="@+id/text_itempark_priceperhour"
+                    style="@style/PriceTextView"
+                    tools:text="10.0" />
+
+                <TextView
+                    style="@style/PriceTextView"
+                    android:gravity="end"
+                    android:text="D: $"/>
+
+                <TextView
+                    android:id="@+id/text_itempark_priceperday"
+                    style="@style/PriceTextView"
+                    tools:text="30.0" />
+
+                <TextView
+                    style="@style/PriceTextView"
+                    android:gravity="end"
+                    android:text="M: $"/>
+
+                <TextView
+                    android:id="@+id/text_itempark_pricepermonth"
+                    style="@style/PriceTextView"
+                    tools:text="300.0" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
