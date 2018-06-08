@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ParkNow</string>
+    <string name="app_name" translatable="false">ParkNow</string>
     <string name="menu_main_list">List</string>
     <string name="menu_main_map">Map</string>
     <string name="menu_main_more">More</string>
@@ -8,7 +8,7 @@
     <string name="about">About</string>
     <string name="logout">Logout</string>
     <string name="developer_hint">Developer</string>
-    <string name="developer_value">Mauricio Ramalho Custodio</string>
+    <string name="developer_value" translatable="false">Mauricio Ramalho Custodio</string>
     <string name="appversion_hint">App Version</string>
     <string name="remove">Remove this parking lot from list?</string>
     <string name="removed">Removed</string>
@@ -22,7 +22,7 @@
     <string name="parking_priceperday">Price per Day</string>
     <string name="parking_pricepermonth">Price per Month</string>
     <string name="parking_description">Description</string>
-    <string name="parking_phone">Contact</string>
+    <string name="parking_phone">Contact Phone</string>
     <string name="cancel">Cancel</string>
     <string name="okay">Okay</string>
     <string name="share">Share</string>

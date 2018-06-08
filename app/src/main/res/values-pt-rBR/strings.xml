@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ParkNow</string>
+    <string name="menu_main_list">Lista</string>
+    <string name="menu_main_map">Mapa</string>
+    <string name="menu_main_more">Mais</string>
+    <string name="main_logout">Desconectar usuário atual?</string>
+    <string name="add_parkinglot">Adicionar Estacionamento</string>
+    <string name="about">Sobre</string>
+    <string name="logout">Logout</string>
+    <string name="developer_hint">Desenvolvedor</string>
+    <string name="appversion_hint">Versão do App</string>
+    <string name="remove">Remover este estacionamento da lista?</string>
+    <string name="removed">Removido</string>
+    <string name="parking_name">Nome do Estacionamento</string>
+    <string name="parking_address">Endereço</string>
+    <string name="parking_openat">Abre às</string>
+    <string name="parking_closeat">Fecha às</string>
+    <string name="parking_priceperhour">Preço por Hora</string>
+    <string name="parking_priceperday">Preço por Dia</string>
+    <string name="parking_pricepermonth">Preço por Mês</string>
+    <string name="parking_description">Descrição</string>
+    <string name="parking_phone">Telefone para Contato</string>
+    <string name="cancel">Cancelar</string>
+    <string name="okay">Okay</string>
+    <string name="share">Compartilhar</string>
+    <string name="here_is_my_location">Aqui está minha localização</string>
+    <string name="share_via">Compartilhar através de</string>
+</resources>
