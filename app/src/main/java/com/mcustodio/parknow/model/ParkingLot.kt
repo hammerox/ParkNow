@@ -24,9 +24,9 @@ class ParkingLot(@PrimaryKey(autoGenerate = true) var recordId : Long? = null,
 
 
     companion object {
-        fun createMock() : ParkingLot {
-            val mock = ParkingLot()
-            mock.apply {
+        fun createMockList() : List<ParkingLot> {
+            val mockFiap = ParkingLot()
+            mockFiap.apply {
                 createdDate = Calendar.getInstance().time
                 name = "FIAP"
                 description = "Estacionamento próximo da FIAP"
@@ -40,7 +40,22 @@ class ParkingLot(@PrimaryKey(autoGenerate = true) var recordId : Long? = null,
                 latitude = -23.564296
                 longitude = -46.652622
             }
-            return mock
+            val mockStone = ParkingLot()
+            mockStone.apply {
+                createdDate = Calendar.getInstance().time
+                name = "Stone"
+                description = "Estacionamento próximo da Stone"
+                address = "R. Fidêncio Ramos, 308 - Vila Olimpia, São Paulo - SP, 03178-200"
+                phone = "019992256303"
+                openAt = Time.valueOf("10:00:00")
+                closeAt = Time.valueOf("22:00:00")
+                pricePerHour = 15.0f
+                pricePerDay = 40.0f
+                pricePerMonth = 400.0f
+                latitude = -23.595069
+                longitude = -46.686993
+            }
+            return listOf(mockFiap, mockStone)
         }
     }
 

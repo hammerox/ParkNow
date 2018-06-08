@@ -67,7 +67,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel.parkingLots.observe(this, Observer { data ->
             if (data?.isEmpty() == true) {
-                viewModel.add(ParkingLot.createMock())
+                val mockList = ParkingLot.createMockList()
+                mockList.forEach { viewModel.add(it) }
             }
         })
 
