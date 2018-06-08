@@ -21,8 +21,8 @@ class ParkingViewHolder(view: View,
     fun setValues(parkingLot: ParkingLot) {
         name.text = parkingLot.name
         address.text = parkingLot.address
-        pricePerHour.text = parkingLot.pricePerDay.toString()
-        pricePerDay.text = parkingLot.pricePerHour.toString()
+        pricePerHour.text = parkingLot.pricePerHour.toString()
+        pricePerDay.text = parkingLot.pricePerDay.toString()
         pricePerMonth.text = parkingLot.pricePerMonth.toString()
 
         card.setOnClickListener { onClick(parkingLot) }

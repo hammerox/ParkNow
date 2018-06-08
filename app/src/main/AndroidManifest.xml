@@ -18,7 +18,7 @@
             android:resource="@color/colorAccent" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD_QBOepuwYR6Yc88joUTDK63QYji9AEBA" />
+            android:value="@string/google_maps_api_key" />
 
         <activity android:name=".view.main.MainActivity" />
         <activity
