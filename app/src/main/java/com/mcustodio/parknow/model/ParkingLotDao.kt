@@ -12,7 +12,7 @@ interface ParkingLotDao : BaseDao<ParkingLot> {
     fun getAll() : LiveData<List<ParkingLot>>
 
     @Query("SELECT * FROM ParkingLot WHERE recordId = :id LIMIT 1")
-    fun getById(id: Long) : ParkingLot
+    fun getById(id: Long) : LiveData<ParkingLot>
 
     @Query("SELECT * FROM ParkingLot")
     fun getAllList() : List<ParkingLot>

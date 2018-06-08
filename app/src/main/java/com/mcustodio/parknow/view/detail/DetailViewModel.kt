@@ -8,19 +8,13 @@ import com.mcustodio.parknow.repository.ParkingLotRepository
 class DetailViewModel(app: Application) : AndroidViewModel(app) {
 
     private val parkingRepo = ParkingLotRepository()
-    val parkingLot: MutableLiveData<ParkingLot> = MutableLiveData()
+    val parkingLot = MediatorLiveData<ParkingLot>()
     val actionSuccess = MutableLiveData<Boolean>()
 
 
-    init {
-        parkingRepo.onQuerySuccess = {
-            parkingLot.postValue(it)
-        }
-    }
-
-
     fun getParkingLot(id: Long) {
-        parkingRepo.queryById(id)
+        parkingLot.addSource(parkingRepo.queryById(id)) { parkingLot.value = it }
+
     }
 
 

@@ -16,13 +16,8 @@ class ParkingLotRepository {
         return database.getAll()
     }
 
-    fun queryById(id: Long) {
-        Observable.just(database)
-                .doOnNext {
-                    onQuerySuccess?.invoke(database.getById(id))
-                }
-                .subscribeOn(Schedulers.io())
-                .subscribe()
+    fun queryById(id: Long) : LiveData<ParkingLot> {
+        return database.getById(id)
     }
 
     fun insert(parkingLot: ParkingLot) {
