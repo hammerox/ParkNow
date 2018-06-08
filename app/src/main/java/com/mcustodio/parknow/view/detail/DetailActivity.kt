@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -17,6 +18,7 @@ import com.mcustodio.parknow.hideWhenKeyboardIsVisible
 import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.switchVisibility
 import kotlinx.android.synthetic.main.activity_edit.*
+import java.sql.Time
 
 
 class DetailActivity : AppCompatActivity() {
@@ -99,8 +101,8 @@ class DetailActivity : AppCompatActivity() {
             input_detail_description.setText(it?.description)
             input_detail_address.setText(it?.address)
             input_detail_phone.setText(it?.phone)
-            input_detail_openat.setText(it?.openAt?.toString())
-            input_detail_closeat.setText(it?.closeAt?.toString())
+            input_detail_openat.setText(it?.openAt?.toString()?.split(":")?.get(0))
+            input_detail_closeat.setText(it?.closeAt?.toString()?.split(":")?.get(0))
             input_detail_priceperhour.setText(it?.pricePerHour?.toString())
             input_detail_priceperday.setText(it?.pricePerDay?.toString())
             input_detail_pricepermonth.setText(it?.pricePerMonth?.toString())
@@ -112,19 +114,26 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun upsertRecord() {
-        val parkingLot = parkingId?.let { viewModel.parkingLot.value } ?: ParkingLot()
-        parkingLot.name = input_detail_name.text.toString()
-        parkingLot.description = input_detail_description.text.toString()
-        parkingLot.address = input_detail_address.text.toString()
-        parkingLot.phone = input_detail_phone.text.toString()
-//            parkingLot.openAt = input_detail_openat
-//            parkingLot.closeAt = input_detail_closeat
-//            parkingLot.pricePerHour = input_detail_priceperhour.text.toString().toFloat()
-//            parkingLot.pricePerDay = input_detail_priceperday.text.toString().toFloat()
-//            parkingLot.pricePerMonth = input_detail_pricepermonth.text.toString().toFloat()
-        parkingLot.latitude = parkingLot.latitude?.let { it } ?: initialPosition.latitude
-        parkingLot.longitude = parkingLot.longitude?.let { it } ?: initialPosition.longitude
-        viewModel.upsert(parkingLot)
+        try {
+            val parkingLot = parkingId?.let { viewModel.parkingLot.value } ?: ParkingLot()
+            parkingLot.name = input_detail_name.text.toString()
+            parkingLot.description = input_detail_description.text.toString()
+            parkingLot.address = input_detail_address.text.toString()
+            parkingLot.phone = input_detail_phone.text.toString()
+            parkingLot.openAt = Time.valueOf("${input_detail_openat.text}:00:00")
+            parkingLot.closeAt = Time.valueOf("${input_detail_closeat.text}:00:00")
+            parkingLot.pricePerHour = input_detail_priceperhour.text.toString().toFloat()
+            parkingLot.pricePerDay = input_detail_priceperday.text.toString().toFloat()
+            parkingLot.pricePerMonth = input_detail_pricepermonth.text.toString().toFloat()
+            parkingLot.latitude = parkingLot.latitude?.let { it } ?: initialPosition.latitude
+            parkingLot.longitude = parkingLot.longitude?.let { it } ?: initialPosition.longitude
+            viewModel.upsert(parkingLot)
+        } catch (e: Exception) {
+            AlertDialog.Builder(this)
+                .setMessage(e.message)
+                .setPositiveButton("Ok", null)
+                .show()
+        }
     }
 
     private fun shareLocation() {
