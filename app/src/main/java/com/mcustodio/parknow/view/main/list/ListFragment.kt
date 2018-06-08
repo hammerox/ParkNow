@@ -11,10 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.model.ParkingLot
-import com.mcustodio.parknow.view.detail.DetailActivity
+import com.mcustodio.parknow.view.edit.EditActivity
 import com.mcustodio.parknow.view.main.MainViewModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
 
@@ -42,7 +41,7 @@ class ListFragment : Fragment() {
     }
 
     private fun onCardClick() : ((ParkingLot) -> Unit) = { parkingLot ->
-        DetailActivity.launch(activity!!, parkingLot.id!!)
+        EditActivity.launchEdit(activity!!, parkingLot.recordId!!)
     }
 
     private fun onCardLongClick() : ((ParkingLot) -> Boolean) = { parkingLot ->

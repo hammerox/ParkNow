@@ -15,9 +15,12 @@ import kotlinx.android.synthetic.main.activity_edit.*
 
 class EditActivity : AppCompatActivity() {
 
-    val viewModel by lazy { ViewModelProviders.of(this).get(EditViewModel::class.java) }
-    val parkingId by lazy { intent.getLongExtra(KEY_ID, -1) }
-    val initialPosition by lazy { LatLng(intent.getDoubleExtra(KEY_LAT, 0.0), intent.getDoubleExtra(KEY_LNG, 0.0)) }
+    private val viewModel by lazy { ViewModelProviders.of(this).get(EditViewModel::class.java) }
+    private val parkingId by lazy {
+        val id = intent.getLongExtra(KEY_ID, -1L)
+        if (id != -1L) id else null
+    }
+    private val initialPosition by lazy { LatLng(intent.getDoubleExtra(KEY_LAT, 0.0), intent.getDoubleExtra(KEY_LNG, 0.0)) }
 
 
 
@@ -29,6 +32,7 @@ class EditActivity : AppCompatActivity() {
         setupFields()
         setupView()
         setupViewModel()
+        parkingId?.let { viewModel.getParkingLot(it) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -58,26 +62,42 @@ class EditActivity : AppCompatActivity() {
 
     private fun setupView() {
         fab_edit_done.setOnClickListener {
-            val parkingLot = ParkingLot()
-            parkingLot.name = input_edit_name.text.toString()
-            parkingLot.description = input_edit_description.text.toString()
-            parkingLot.address = input_edit_address.text.toString()
-            parkingLot.phone = input_edit_phone.text.toString()
+            upsertRecord()
+        }
+    }
+
+    private fun setupViewModel() {
+        viewModel.parkingLot.observe(this, Observer {
+            input_edit_name.setText(it?.name)
+            input_edit_description.setText(it?.description)
+            input_edit_address.setText(it?.address)
+            input_edit_phone.setText(it?.phone)
+            input_edit_openat.setText(it?.openAt?.toString())
+            input_edit_closeat.setText(it?.closeAt?.toString())
+            input_edit_priceperhour.setText(it?.pricePerHour?.toString())
+            input_edit_priceperday.setText(it?.pricePerDay?.toString())
+            input_edit_pricepermonth.setText(it?.pricePerMonth?.toString())
+        })
+
+        viewModel.actionSuccess.observe(this, Observer {
+            if (it == true) finish()
+        })
+    }
+
+    private fun upsertRecord() {
+        val parkingLot = parkingId?.let { viewModel.parkingLot.value } ?: ParkingLot()
+        parkingLot.name = input_edit_name.text.toString()
+        parkingLot.description = input_edit_description.text.toString()
+        parkingLot.address = input_edit_address.text.toString()
+        parkingLot.phone = input_edit_phone.text.toString()
 //            parkingLot.openAt = input_edit_openat
 //            parkingLot.closeAt = input_edit_closeat
 //            parkingLot.pricePerHour = input_edit_priceperhour.text.toString().toFloat()
 //            parkingLot.pricePerDay = input_edit_priceperday.text.toString().toFloat()
 //            parkingLot.pricePerMonth = input_edit_pricepermonth.text.toString().toFloat()
-            parkingLot.latitude = initialPosition.latitude
-            parkingLot.longitude = initialPosition.longitude
-            viewModel.insert(parkingLot)
-        }
-    }
-
-    private fun setupViewModel() {
-        viewModel.insertSuccess.observe(this, Observer {
-            if (it == true) finish()
-        })
+        parkingLot.latitude = initialPosition.latitude
+        parkingLot.longitude = initialPosition.longitude
+        viewModel.upsert(parkingLot)
     }
 
 

@@ -7,7 +7,7 @@ import java.util.*
 
 
 @Entity
-class ParkingLot(@PrimaryKey(autoGenerate = true) var id : Long? = null,
+class ParkingLot(@PrimaryKey(autoGenerate = true) var recordId : Long? = null,
                  var createdDate: Date? = null,
                  var name: String? = null,
                  var description: String? = null,

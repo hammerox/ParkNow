@@ -11,6 +11,9 @@ interface ParkingLotDao : BaseDao<ParkingLot> {
     @Query("SELECT * FROM ParkingLot")
     fun getAll() : LiveData<List<ParkingLot>>
 
+    @Query("SELECT * FROM ParkingLot WHERE recordId = :id LIMIT 1")
+    fun getById(id: Long) : ParkingLot
+
     @Query("SELECT * FROM ParkingLot")
     fun getAllList() : List<ParkingLot>
 

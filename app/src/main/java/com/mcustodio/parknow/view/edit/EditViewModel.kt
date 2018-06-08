@@ -1,21 +1,33 @@
 package com.mcustodio.parknow.view.edit
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.*
 import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.repository.ParkingLotRepository
 
 class EditViewModel(app: Application) : AndroidViewModel(app) {
 
-    val parkingRepo = ParkingLotRepository()
-    val insertSuccess = MutableLiveData<Boolean>()
+    private val parkingRepo = ParkingLotRepository()
+    val parkingLot: MutableLiveData<ParkingLot> = MutableLiveData()
+    val actionSuccess = MutableLiveData<Boolean>()
 
 
-    fun insert(parkingLot: ParkingLot) {
-        parkingRepo.insert(parkingLot)
-        insertSuccess.value = true
+    init {
+        parkingRepo.onQuerySuccess = {
+            parkingLot.postValue(it)
+        }
+    }
+
+
+    fun getParkingLot(id: Long) {
+        parkingRepo.queryById(id)
+    }
+
+
+    fun upsert(parkingLot: ParkingLot) {
+        if (parkingLot.recordId == null) parkingRepo.insert(parkingLot)
+        else parkingRepo.update(parkingLot)
+        actionSuccess.value = true
     }
 
 
