@@ -5,16 +5,19 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
+import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.hideWhenKeyboardIsVisible
 import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.switchVisibility
 import kotlinx.android.synthetic.main.activity_edit.*
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -27,7 +30,6 @@ class DetailActivity : AppCompatActivity() {
     private val initialPosition by lazy { LatLng(intent.getDoubleExtra(KEY_LAT, 0.0), intent.getDoubleExtra(KEY_LNG, 0.0)) }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -36,16 +38,20 @@ class DetailActivity : AppCompatActivity() {
         setupView()
         setupButtons()
         setupViewModel()
+        parkingId?.let { viewModel.getParkingLot(it) }
     }
 
-    override fun onResume() {
-        super.onResume()
-        parkingId?.let { viewModel.getParkingLot(it) }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_details, menu)
+        menu.findItem(R.id.action_detail_share).isVisible = viewOnly == true
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> finish()
+            R.id.action_detail_share -> shareLocation()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -116,9 +122,20 @@ class DetailActivity : AppCompatActivity() {
 //            parkingLot.pricePerHour = input_detail_priceperhour.text.toString().toFloat()
 //            parkingLot.pricePerDay = input_detail_priceperday.text.toString().toFloat()
 //            parkingLot.pricePerMonth = input_detail_pricepermonth.text.toString().toFloat()
-        parkingLot.latitude = initialPosition.latitude
-        parkingLot.longitude = initialPosition.longitude
+        parkingLot.latitude = parkingLot.latitude?.let { it } ?: initialPosition.latitude
+        parkingLot.longitude = parkingLot.longitude?.let { it } ?: initialPosition.longitude
         viewModel.upsert(parkingLot)
+    }
+
+    private fun shareLocation() {
+        val parkingLot = viewModel.parkingLot.value
+        val uri = "http://maps.google.com/maps?saddr=${parkingLot?.latitude},${parkingLot?.longitude}"
+        val intent = Intent(android.content.Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        val shareSub = getString(R.string.here_is_my_location)
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub)
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
+        startActivity(Intent.createChooser(intent, getString(R.string.share_via)))
     }
 
 

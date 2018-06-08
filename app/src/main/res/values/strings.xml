@@ -25,6 +25,9 @@
     <string name="parking_phone">Contact</string>
     <string name="cancel">Cancel</string>
     <string name="okay">Okay</string>
+    <string name="share">Share</string>
+    <string name="here_is_my_location">Here is my location</string>
+    <string name="share_via">Share via</string>
 
 
 </resources>
