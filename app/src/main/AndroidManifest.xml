@@ -30,7 +30,7 @@
                 android:value=".view.main.MainActivity" />
         </activity>
         <activity android:name=".view.detail.DetailActivity" />
-        <activity android:name=".view.edit.EditActivity"></activity>
+        <activity android:name=".view.detail.DetailActivity"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.mcustodio.parknow.view.main.MainViewModel
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
-import com.mcustodio.parknow.view.edit.EditActivity
+import com.mcustodio.parknow.view.detail.DetailActivity
 import com.google.android.gms.maps.model.LatLngBounds
 
 
@@ -79,7 +79,7 @@ class MapFragment : SupportMapFragment() {
     }
 
     fun launchEditActivity() {
-        movablePin?.position?.let { EditActivity.launchNew(activity!!, it) }
+        movablePin?.position?.let { DetailActivity.launchNew(activity!!, it) }
         viewModel.isCreationMode.value = false
     }
 }

@@ -1,11 +1,11 @@
-package com.mcustodio.parknow.view.edit
+package com.mcustodio.parknow.view.detail
 
 import android.app.Application
 import android.arch.lifecycle.*
 import com.mcustodio.parknow.model.ParkingLot
 import com.mcustodio.parknow.repository.ParkingLotRepository
 
-class EditViewModel(app: Application) : AndroidViewModel(app) {
+class DetailViewModel(app: Application) : AndroidViewModel(app) {
 
     private val parkingRepo = ParkingLotRepository()
     val parkingLot: MutableLiveData<ParkingLot> = MutableLiveData()
