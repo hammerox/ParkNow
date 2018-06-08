@@ -41,7 +41,7 @@ class ListFragment : Fragment() {
     }
 
     private fun onCardClick() : ((ParkingLot) -> Unit) = { parkingLot ->
-        DetailActivity.launchEdit(activity!!, parkingLot.recordId!!)
+        DetailActivity.launchViewOnly(activity!!, parkingLot.recordId!!)
     }
 
     private fun onCardLongClick() : ((ParkingLot) -> Boolean) = { parkingLot ->

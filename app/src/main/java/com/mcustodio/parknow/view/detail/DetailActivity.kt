@@ -7,10 +7,12 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.WindowManager
 import com.google.android.gms.maps.model.LatLng
 import com.mcustodio.parknow.R
 import com.mcustodio.parknow.hideWhenKeyboardIsVisible
 import com.mcustodio.parknow.model.ParkingLot
+import com.mcustodio.parknow.switchVisibility
 import kotlinx.android.synthetic.main.activity_edit.*
 
 class DetailActivity : AppCompatActivity() {
@@ -20,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
         val id = intent.getLongExtra(KEY_ID, -1L)
         if (id != -1L) id else null
     }
+    private val viewOnly by lazy { intent.getBooleanExtra(KEY_VIEWONLY, false) }
     private val initialPosition by lazy { LatLng(intent.getDoubleExtra(KEY_LAT, 0.0), intent.getDoubleExtra(KEY_LNG, 0.0)) }
 
 
@@ -28,10 +31,14 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        fab_edit_done.hideWhenKeyboardIsVisible(this)
-        setupFields()
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         setupView()
+        setupFabs()
         setupViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
         parkingId?.let { viewModel.getParkingLot(it) }
     }
 
@@ -47,23 +54,29 @@ class DetailActivity : AppCompatActivity() {
         return super.onNavigateUp()
     }
 
-    private fun setupFields() {
-        input_edit_name
-        input_edit_description
-        input_edit_address
-        input_edit_phone
-        input_edit_openat
-        input_edit_closeat
-        input_edit_priceperhour
-        input_edit_priceperday
-        input_edit_pricepermonth
-        fab_edit_done
+    private fun setupView() {
+        if (viewOnly == true) {
+            input_edit_name.isEnabled = false
+            input_edit_description.isEnabled = false
+            input_edit_address.isEnabled = false
+            input_edit_phone.isEnabled = false
+            input_edit_openat.isEnabled = false
+            input_edit_closeat.isEnabled = false
+            input_edit_priceperhour.isEnabled = false
+            input_edit_priceperday.isEnabled = false
+            input_edit_pricepermonth.isEnabled = false
+            fab_edit_edit.hideWhenKeyboardIsVisible(this)
+        } else {
+            fab_edit_done.hideWhenKeyboardIsVisible(this)
+        }
     }
 
-    private fun setupView() {
-        fab_edit_done.setOnClickListener {
-            upsertRecord()
-        }
+    private fun setupFabs() {
+        fab_edit_edit.setOnClickListener { launchEdit(this, parkingId!!) }
+        fab_edit_edit.switchVisibility(viewOnly == true)
+
+        fab_edit_done.setOnClickListener { upsertRecord() }
+        fab_edit_done.switchVisibility(viewOnly == false)
     }
 
     private fun setupViewModel() {
@@ -106,6 +119,14 @@ class DetailActivity : AppCompatActivity() {
         const val KEY_ID = "KEY_ID"
         const val KEY_LAT = "KEY_LAT"
         const val KEY_LNG = "KEY_LNG"
+        const val KEY_VIEWONLY = "KEY_VIEWONLY"
+
+        fun launchViewOnly(context: Context, id: Long) {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(KEY_ID, id)
+            intent.putExtra(KEY_VIEWONLY, true)
+            context.startActivity(intent)
+        }
 
         fun launchNew(context: Context, pos: LatLng) {
             val intent = Intent(context, DetailActivity::class.java)
