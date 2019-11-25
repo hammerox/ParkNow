@@ -24,8 +24,5 @@ class ParkingViewHolder(view: View,
         pricePerHour.text = parkingLot.pricePerHour.toString()
         pricePerDay.text = parkingLot.pricePerDay.toString()
         pricePerMonth.text = parkingLot.pricePerMonth.toString()
-
-        card.setOnClickListener { onClick(parkingLot) }
-        card.setOnLongClickListener { onLongClick(parkingLot) }
     }
 }

@@ -28,23 +28,23 @@ class ParkingLot(@PrimaryKey(autoGenerate = true) var recordId : Long? = null,
             val mockFiap = ParkingLot()
             mockFiap.apply {
                 createdDate = Calendar.getInstance().time
-                name = "FIAP"
-                description = "Estacionamento próximo da FIAP"
-                address = "Av. Paulista, 1.106 - Bela Vista, São Paulo - SP, 01310-100"
+                name = "Rio de Janeiro"
+                description = "Estacionamento próximo do aeroporto"
+                address = "Av. Gen. Justo, 375 - Centro, Rio de Janeiro - RJ, 20021-130"
                 phone = "019992256303"
                 openAt = Time.valueOf("08:00:00")
                 closeAt = Time.valueOf("22:00:00")
                 pricePerHour = 10.0f
                 pricePerDay = 30.0f
                 pricePerMonth = 300.0f
-                latitude = -23.564296
-                longitude = -46.652622
+                latitude = -22.907245
+                longitude = -43.169039
             }
             val mockStone = ParkingLot()
             mockStone.apply {
                 createdDate = Calendar.getInstance().time
-                name = "Stone"
-                description = "Estacionamento próximo da Stone"
+                name = "São Paulo"
+                description = "Estacionamento próximo da lanchonete"
                 address = "R. Fidêncio Ramos, 308 - Vila Olimpia, São Paulo - SP, 03178-200"
                 phone = "019992256303"
                 openAt = Time.valueOf("10:00:00")

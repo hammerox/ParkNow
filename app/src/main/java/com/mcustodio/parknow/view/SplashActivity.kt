@@ -38,13 +38,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun tryToLogin() {
-        val user = FirebaseAuth.getInstance().currentUser
-        debug(user?.email)
-        if (user != null) {
-            login(user)
-        } else {
-            signIn()
-        }
+        login()
     }
 
     private fun signIn() {
@@ -66,15 +60,15 @@ class SplashActivity : AppCompatActivity() {
         if (requestCode == this.requestCode) {
             if (resultCode == RESULT_OK) {  // Successfully signed in
                 val user = FirebaseAuth.getInstance().currentUser
-                login(user!!)
+                login()
             } else {
                 finish()
             }
         }
     }
 
-    private fun login(user: FirebaseUser) {
-        AppDatabase.getFrom(this, user.uid)
+    private fun login() {
+        AppDatabase.getFrom(this, "parknow-db")
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
